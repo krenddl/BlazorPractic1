@@ -1,0 +1,92 @@
+[
+  {
+    "ContainingType": "AuthApi.Controllers.UserController",
+    "Method": "Authorize",
+    "RelativePath": "Authorize",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "auth",
+        "Type": "AuthApi.Requests.Auth",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.UserController",
+    "Method": "CreateNewUser",
+    "RelativePath": "CreateNewUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createNewUser",
+        "Type": "AuthApi.Requests.CreateNewUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.UserController",
+    "Method": "DeleteUsers",
+    "RelativePath": "DeleteUsers",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user_id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.UserController",
+    "Method": "GetAllUsers",
+    "RelativePath": "GetAllUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.UserController",
+    "Method": "Registraion",
+    "RelativePath": "Registration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regUser",
+        "Type": "AuthApi.Requests.CreateNewUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.UserController",
+    "Method": "UpdateUser",
+    "RelativePath": "UpdateUser",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateUser",
+        "Type": "AuthApi.Requests.UpdateUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

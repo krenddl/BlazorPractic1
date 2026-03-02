@@ -1,0 +1,52 @@
+﻿@page "/profile"
+@using BlazorPractice1.ApiRequests
+@using BlazorPractice1.ApiRequests.Model
+@using BlazorPractice1.ApiRequests.Services
+
+@inject NavigationManager Nav
+
+<PageTitle>Profile</PageTitle>
+
+<h1>Профиль</h1>
+<p><b>Name:</b> @userService.CurrentUser.Name</p>
+<input @bind="userService.CurrentUser.Name" />
+<p><b>Email:</b> @userService.CurrentUser.Email</p>
+<input @bind="userService.CurrentUser.Email" />
+<p><b>Description:</b> @userService.CurrentUser.Description</p>
+<input @bind="userService.CurrentUser.Description" />
+<p><b>Password:</b> @userService.CurrentUser.Password</p>
+<input @bind="userService.CurrentUser.Password" />
+<button type="button" @onclick="Save">Сохранить</button>
+<button class="btn btn-danger" @onclick="Logout">Выйти</button>
+
+@code {
+    [Inject] private ApiRequest apiRequest { get; set; }
+    [Inject] private UserService userService { get; set; }
+    private UpdateUserRequest updateUser = new UpdateUserRequest();
+    protected override void OnInitialized()
+    {
+        if (userService.CurrentUser == null)
+            Nav.NavigateTo("/login");
+
+    }
+    private async Task Save()
+    {
+        updateUser.id_User = userService.CurrentUser.id_User;
+        updateUser.Name = userService.CurrentUser.Name;
+        updateUser.Email = userService.CurrentUser.Email;
+        updateUser.Description = userService.CurrentUser.Description;
+        updateUser.Password = userService.CurrentUser.Password;
+        var res = await apiRequest.UpdateUser(updateUser);
+
+        if (res != null && res.status)
+        {
+            userService.CurrentUser = res.user;
+        }
+    }
+    private void Logout()
+        {
+            userService.Logout();
+            Nav.NavigateTo("/login", forceLoad: true);
+        }
+    }
+}

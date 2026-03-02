@@ -1,0 +1,43 @@
+﻿@page "/register"
+@using BlazorPractice1.ApiRequests
+@using BlazorPractice1.ApiRequests.Model
+@using BlazorPractice1.ApiRequests.Services
+@inject NavigationManager Nav
+
+<PageTitle>Register</PageTitle>
+
+<h1>Register</h1>
+
+<input placeholder="Email" @bind="reg.Email" />
+<input placeholder="Name" @bind="reg.Name" />
+<input placeholder="Description" @bind="reg.Description" />
+<input placeholder="Password" type="password" @bind="reg.Password" />
+
+<button type="button" @onclick="Regis">Зарегистрироваться</button>
+
+<p>@msg</p>
+
+@code {
+    [Inject] private ApiRequest apiRequest { get; set; }
+    [Inject] private UserService userService { get; set; }
+    private AddNewUserRequest reg = new AddNewUserRequest();
+    private string msg = "";
+
+    private async Task Regis()
+    {
+        msg = "";
+        reg.Role_id = 2;
+        var res = await apiRequest.RegistrationAsync(reg);
+
+        if (res != null && res.status)
+        {
+            
+            msg = "Вы зарегестрировались!";
+
+        }
+        else
+        {
+            msg = "Ошибка регистрации";
+        }
+    }
+}

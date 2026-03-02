@@ -1,0 +1,224 @@
+﻿@page "/admin"
+@using BlazorPractice1.ApiRequests
+@using BlazorPractice1.ApiRequests.Model
+@using BlazorPractice1.ApiRequests.Services
+@inject NavigationManager Nav
+
+<PageTitle>Admin</PageTitle>
+
+@if (userService.CurrentUser == null)
+{
+    <p>Сначала войди.</p>
+}
+else if (!userService.IsAdmin)
+{
+    <p>Нет доступа (только Admin).</p>
+}
+else
+{
+    <h1>Admin panel</h1>
+
+    <button type="button" @onclick="LoadUsers">Обновить</button>
+    <p>@msg</p>
+
+    <table class="table table-bordered">
+        <thead class="alert-dark">
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Role_Id</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (users == null)
+            {
+                <tr><td colspan="6">Loading...</td></tr>
+            }
+            else if (!users.Any())
+            {
+                <tr><td colspan="6">No users</td></tr>
+            }
+            else
+            {
+                @if (isCreating)
+                {
+                    <tr>
+                        <td>New</td>
+                        <td><input @bind="addNewUser.Email" /></td>
+                        <td><input @bind="addNewUser.Password" /></td>
+                        <td><input @bind="addNewUser.Name" /></td>
+                        <td><input @bind="addNewUser.Description" /></td>
+                        <td><input type="number" @bind="addNewUser.Role_id" /></td>
+                        <td>
+                            <button @onclick="SaveAddNewUser">Save</button>
+                            <button @onclick="CancelEdit">Cancel</button>
+                        </td>
+
+                    </tr>
+                }
+                @foreach (var u in users)
+                {
+                    <tr>
+                        <td>@u.id_User</td>
+
+                        @if (editingId == u.id_User)
+                        {
+                            <td><input @bind="editUser.Email" /></td>
+                            <td><input @bind="editUser.Password" /></td>
+                            <td><input @bind="editUser.Name" /></td>
+                            <td><input @bind="editUser.Description" /></td>
+                            <td><input type="number" @bind="editUser.Role_id" /></td>
+                            <td>
+                                <button @onclick="SaveEdit">Save</button>
+                                <button @onclick="CancelEdit">Cancel</button>
+                            </td>
+
+                        }
+                        else
+                        {
+                            <td>@u.Email</td>
+                            <td>@u.Password</td>
+                            <td>@u.Name</td>
+                            <td>@u.Description</td>
+                            <td>@u.Role_Id</td>
+
+                            <td>
+                                <button @onclick="() => EditUser(u)">Edit</button>
+                            </td>
+
+                            <td>
+                                <button @onclick="() => Delete(u.id_User)">Delete</button>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <button @onclick="AddNewUserAdmin">Добавить пользователя</button>
+}
+
+
+@code {
+    [Inject] private ApiRequest apiRequest { get; set; }
+    [Inject] private UserService userService { get; set; }
+    private AddNewUserRequest addNewUser = new AddNewUserRequest();
+    private int? editingId = null;
+    private UpdateUserRequest editUser = new UpdateUserRequest();
+    private List<User> users;
+    private string msg = "";
+    private bool isCreating = false;
+    private User newUser = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (userService.CurrentUser == null)
+        {
+            Nav.NavigateTo("/login");
+            return;
+        }
+
+        if (!userService.IsAdmin) return;
+
+        await LoadUsers();
+    }
+    private void EditUser(User u)
+    {
+        editingId = u.id_User;
+
+        editUser = new UpdateUserRequest
+            {
+                id_User = u.id_User,
+                Email = u.Email,
+                Password = u.Password,
+                Name = u.Name,
+                Description = u.Description,
+                Role_id = u.Role_Id
+            };
+    }
+    private void CancelEdit()
+    {
+        editingId = null;
+        isCreating = false;
+    }
+    private async Task SaveEdit()
+    {
+        msg = "";
+
+        var res = await apiRequest.UpdateUser(editUser);
+
+        if (res != null && res.status)
+        {
+            msg = "Обновлено";
+            editingId = null;
+            await LoadUsers();
+        }
+        else
+        {
+            msg = "Ошибка обновления";
+        }
+    }
+
+    private async Task LoadUsers()
+    {
+        msg = "";
+        var res = await apiRequest.GetAllUsersAsync();
+
+        if (res != null && res.status && res.user != null)
+            users = res.user;
+        else
+        {
+            users = new List<User>();
+            msg = "Не удалось загрузить пользователей";
+        }
+    }
+
+    private async Task Delete(int id)
+    {
+        msg = "";
+
+        var res = await apiRequest.DeleteUserAsync(id);
+
+        if (res != null && res.status)
+        {
+            msg = "Удалено";
+            await LoadUsers();
+        }
+        else
+        {
+            msg = "Ошибка удаления";
+        }
+    }
+    private void AddNewUserAdmin()
+    {
+        newUser = new User
+            {
+                Role_Id = 2
+            };
+
+        isCreating = true;
+    }
+    private async Task SaveAddNewUser()
+    {
+        msg = "";
+
+        var res = await apiRequest.RegistrationAsync(addNewUser);
+
+        if (res != null && res.status)
+        {
+            msg = "Пользователь создан";
+            isCreating = false;
+            await LoadUsers();
+        }
+        else
+        {
+            msg = "Ошибка создания";
+        }
+    }
+
+}
