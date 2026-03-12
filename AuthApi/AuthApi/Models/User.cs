@@ -14,6 +14,7 @@ namespace AuthApi.Models
         [ForeignKey("Role")]
         public int Role_Id { get; set; }
         public Role Role { get; set; }
+        public ICollection<Session> sessions { get; set; }
 
     }
 }

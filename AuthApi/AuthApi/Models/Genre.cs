@@ -3,13 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace AuthApi.Models
 {
-    public class Role
+    public class Genre
     {
         [Key]
-        public int id_Role { get; set; }
-        public string Name { get; set; }
-
+        public int id_Genre { get; set; }
+        public string name { get; set; }
         [JsonIgnore]
-        public ICollection<User> users { get; set; }
+        public ICollection<Movies> movies { get; set; }
     }
 }

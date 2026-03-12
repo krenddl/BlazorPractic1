@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\python_pro\\Desktop\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj": {}
+    "C:\\Users\\202306\\Desktop\\blazor\\BlazorPractic1\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\python_pro\\Desktop\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj": {
+    "C:\\Users\\202306\\Desktop\\blazor\\BlazorPractic1\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\python_pro\\Desktop\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj",
+        "projectUniqueName": "C:\\Users\\202306\\Desktop\\blazor\\BlazorPractic1\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj",
         "projectName": "BlazorPractice1",
-        "projectPath": "C:\\Users\\python_pro\\Desktop\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj",
-        "packagesPath": "C:\\Users\\python_pro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\python_pro\\Desktop\\BlazorPractice1\\BlazorPractice1\\obj\\",
+        "projectPath": "C:\\Users\\202306\\Desktop\\blazor\\BlazorPractic1\\BlazorPractice1\\BlazorPractice1\\BlazorPractice1.csproj",
+        "packagesPath": "C:\\Users\\202306\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\202306\\Desktop\\blazor\\BlazorPractic1\\BlazorPractice1\\BlazorPractice1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\python_pro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\202306\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -63,13 +62,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.13, )",
+              "version": "[8.0.24, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.2, )",
+              "version": "[9.0.13, )",
               "autoReferenced": true
             }
           },
@@ -87,7 +86,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[8.0.13, 8.0.13]"
+              "version": "[8.0.24, 8.0.24]"
             }
           ],
           "frameworkReferences": {
@@ -95,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

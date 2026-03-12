@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContextDb>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDbString")));
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddSingleton<JwtG>
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -20,6 +21,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
+
 
 var app = builder.Build();
 

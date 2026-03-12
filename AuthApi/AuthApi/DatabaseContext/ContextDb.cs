@@ -12,5 +12,8 @@ namespace AuthApi.DatabaseContext
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Movies> Movies { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Session> Sessions { get; set; }
     }
 }
